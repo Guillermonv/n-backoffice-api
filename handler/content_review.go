@@ -25,6 +25,7 @@ type ContentReview struct {
 	ImageURL         string    `json:"image_url"`
 	ImagePrompt      string    `json:"image_prompt"`
 	Slug             string    `json:"slug"`
+	Section          int       `json:"section"`
 	CreatedAt        time.Time `json:"created"`
 	UpdatedAt        time.Time `json:"last_updated"`
 }
@@ -108,6 +109,7 @@ func RegisterContentReviewRoutes(r *gin.Engine, db *gorm.DB, cfg config.Config) 
 				ImageURL:         e.ImageURL,
 				ImagePrompt:      e.ImagePrompt,
 				Slug:             e.Slug,
+				Section:          e.Section,
 				CreatedAt:        e.Created,
 				UpdatedAt:        e.LastUpdated,
 			})
@@ -136,6 +138,7 @@ func RegisterContentReviewRoutes(r *gin.Engine, db *gorm.DB, cfg config.Config) 
 			ImageURL         string `json:"image_url"`
 			ImagePrompt      string `json:"image_prompt"`
 			Slug             string `json:"slug"`
+			Section          int    `json:"section"`
 		}
 
 		if err := c.ShouldBindJSON(&input); err != nil {
@@ -164,6 +167,7 @@ func RegisterContentReviewRoutes(r *gin.Engine, db *gorm.DB, cfg config.Config) 
 			ImageURL:         input.ImageURL,
 			ImagePrompt:      input.ImagePrompt,
 			Slug:             input.Slug,
+			Section:          input.Section,
 			Created:          now,
 			LastUpdated:      now,
 		}
@@ -226,6 +230,7 @@ func RegisterContentReviewRoutes(r *gin.Engine, db *gorm.DB, cfg config.Config) 
 		entity.ImageURL = input.ImageURL
 		entity.ImagePrompt = input.ImagePrompt
 		entity.Slug = input.Slug
+		entity.Section = input.Section
 		entity.LastUpdated = time.Now()
 
 		if err := db.Save(&entity).Error; err != nil {

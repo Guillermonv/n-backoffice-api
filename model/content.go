@@ -14,6 +14,7 @@ type Content struct {
 	ImageURL         string
 	ImagePrompt      string
 	Slug             string
+	Section          int
 	Created          time.Time
 	LastUpdated      time.Time
 }
